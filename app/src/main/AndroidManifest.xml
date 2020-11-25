@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Utils.SettingActivity"
-            android:parentActivityName=".View.MainActivity"></activity>
+            android:parentActivityName=".View.MainActivity"/>
         <receiver
             android:name=".Utils.AlarmReceiver"
             android:enabled="true"
@@ -30,7 +30,10 @@
         </activity>
         <activity android:name=".View.DetailActivity"
             android:parentActivityName=".View.MainActivity"/>
-        <activity android:name=".View.MainActivity" />
+        <activity android:name=".View.MainActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
     </application>
 
 </manifest>
