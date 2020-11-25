@@ -13,12 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Utils.SettingActivity"
-            android:parentActivityName=".View.MainActivity"/>
+        <activity android:name=".View.FavouriteActivity"></activity>
+        <activity
+            android:name=".View.SettingActivity"
+            android:parentActivityName=".View.MainActivity" />
+
         <receiver
             android:name=".Utils.AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
+
         <activity
             android:name=".View.SplashScreen"
             android:theme="@style/SplashTheme">
@@ -28,12 +32,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.DetailActivity"
-            android:parentActivityName=".View.MainActivity"/>
-        <activity android:name=".View.MainActivity"
+        <activity
+            android:name=".View.DetailActivity"
+            android:parentActivityName=".View.MainActivity" />
+        <activity
+            android:name=".View.MainActivity"
+            android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:taskAffinity="" />
     </application>
 
 </manifest>

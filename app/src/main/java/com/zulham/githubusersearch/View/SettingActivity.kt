@@ -1,4 +1,4 @@
-package com.zulham.githubusersearch.Utils
+package com.zulham.githubusersearch.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Switch
 import android.widget.TextView
 import com.zulham.githubusersearch.R
+import com.zulham.githubusersearch.Utils.AlarmReceiver
 
 class SettingActivity : AppCompatActivity(){
 

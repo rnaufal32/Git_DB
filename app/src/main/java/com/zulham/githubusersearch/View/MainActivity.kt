@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zulham.githubusersearch.Adapter.ListUserAdapter
-import com.zulham.githubusersearch.Utils.SettingActivity
 import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.R
 import com.zulham.githubusersearch.ViewModel.MainViewModel

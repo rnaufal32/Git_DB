@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".Utils.SettingActivity">
+    tools:context=".View.SettingActivity">
 
     <LinearLayout
         android:orientation="horizontal"
