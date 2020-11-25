@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.FavouriteActivity"></activity>
+        <activity
+            android:name=".View.FavouriteActivity"
+            android:parentActivityName=".View.MainActivity" />
         <activity
             android:name=".View.SettingActivity"
             android:parentActivityName=".View.MainActivity" />

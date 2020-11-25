@@ -126,6 +126,11 @@ class MainActivity : AppCompatActivity() {
                 val i = Intent(this, SettingActivity::class.java)
                 startActivity(i)
             }
+
+            R.id.favourite -> {
+                val i = Intent(this, FavouriteActivity::class.java)
+                startActivity(i)
+            }
         }
 
         return super.onOptionsItemSelected(item)
