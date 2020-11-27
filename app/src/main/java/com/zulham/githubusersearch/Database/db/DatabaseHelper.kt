@@ -26,7 +26,7 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_N
         db?.execSQL(SQL_CREATE_TABLE_FAV)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, old: Int, new: Int) {
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
