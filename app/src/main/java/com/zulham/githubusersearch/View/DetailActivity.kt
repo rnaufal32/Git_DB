@@ -1,22 +1,29 @@
 package com.zulham.githubusersearch.View
 
+import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.loopj.android.http.AsyncHttpClient.log
 import com.zulham.githubusersearch.Adapter.PagerAdapter
+import com.zulham.githubusersearch.Database.db.DatabaseHelper
+import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.R
 import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.ViewModel.DetailViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.InternalCoroutinesApi
 import com.zulham.githubusersearch.Model.UserDetail as UserDetail
 
 class DetailActivity : AppCompatActivity() {
@@ -26,8 +33,11 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var userLoc: TextView
     private lateinit var userComp: TextView
     private lateinit var userRepos: TextView
+    private lateinit var fav: FloatingActionButton
     private lateinit var detailViewModel: DetailViewModel
+    private lateinit var favHelper: FavHelper
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -40,6 +50,7 @@ class DetailActivity : AppCompatActivity() {
         userLoc = findViewById(R.id.userLoc)
         userComp = findViewById(R.id.userCompny)
         userRepos = findViewById(R.id.userRepo)
+        fav = findViewById(R.id.fab)
 
         val sectionsPagerAdapter = PagerAdapter(this, supportFragmentManager)
         VPList.adapter = sectionsPagerAdapter
@@ -64,6 +75,27 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
+        favHelper = FavHelper.getInstance(applicationContext)
+
+        var statusFavorite = false
+        setStatusFavorite(statusFavorite)
+        fav.setOnClickListener{
+            statusFavorite = !statusFavorite
+            favHelper.insert(ContentValues())
+            setStatusFavorite(statusFavorite)
+        }
+
+    }
+
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if(statusFavorite) {
+            Toast.makeText(this, "I Choose You, Senpai", Toast.LENGTH_SHORT).show()
+            fav.setImageResource(R.drawable.ic_baseline_favorite_24)
+        }
+        else {
+            Toast.makeText(this, "Thanks, Senpai", Toast.LENGTH_SHORT).show()
+            fav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
     }
 
     private fun showDetail(){

@@ -75,9 +75,4 @@ class FavHelper(context: Context) {
         return database.update(DB_TABLE, values, "$_ID = ?", arrayOf(id))
     }
 
-    fun deleteById(id: String): Int{
-        return database.delete(DB_TABLE, "$_ID = '$id", null)
-    }
-
-
 }
