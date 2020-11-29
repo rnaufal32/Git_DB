@@ -66,7 +66,12 @@ class FavHelper(context: Context) {
                 null)
     }
 
-    fun insert(values: ContentValues?): Long = database.insert(DB_TABLE, null, values)
+    fun insert(values: ContentValues?): Long {
+        if (!database.isOpen) {
+            open()
+        }
+        return database.insert(DB_TABLE, null, values)
+    }
 
     fun update(id: String, values: ContentValues?): Int {
         return database.update(DB_TABLE, values, "$_ID = ?", arrayOf(id))

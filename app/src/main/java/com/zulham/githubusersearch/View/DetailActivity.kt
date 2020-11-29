@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.loopj.android.http.AsyncHttpClient.log
 import com.zulham.githubusersearch.Adapter.PagerAdapter
+import com.zulham.githubusersearch.Database.db.DatabaseContract
 import com.zulham.githubusersearch.Database.db.DatabaseHelper
 import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.R
@@ -35,12 +36,16 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var userRepos: TextView
     private lateinit var fav: FloatingActionButton
     private lateinit var detailViewModel: DetailViewModel
-    //private lateinit var favHelper: FavHelper
+    private lateinit var favHelper: FavHelper
+
+    private lateinit var contentValues: ContentValues
 
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        contentValues = ContentValues()
 
         supportActionBar?.title = "Detail User"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -75,13 +80,14 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        //favHelper = FavHelper.getInstance(applicationContext)
+        favHelper = FavHelper.getInstance(applicationContext)
 
         var statusFavorite = false
         setStatusFavorite(statusFavorite)
         fav.setOnClickListener{
             statusFavorite = !statusFavorite
-            //favHelper.insert(ContentValues())
+            contentValues.put(DatabaseContract.FavColumns.IS_FAV, statusFavorite)
+            favHelper.insert(contentValues)
             setStatusFavorite(statusFavorite)
         }
 
@@ -124,6 +130,10 @@ class DetailActivity : AppCompatActivity() {
         userLoc.text = user.location
         userComp.text = user.company
         userRepos.text = user.repository.toString()
+
+        contentValues.put(DatabaseContract.FavColumns.USER_ID, 123)
+        contentValues.put(DatabaseContract.FavColumns.USER_NAME, user.name)
+        contentValues.put(DatabaseContract.FavColumns.IMG_USER, user.avatar_url)
     }
 
     private fun showLoading(state: Boolean) {
