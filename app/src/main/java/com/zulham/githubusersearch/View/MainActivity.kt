@@ -14,10 +14,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zulham.githubusersearch.Adapter.ListUserAdapter
+import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.R
 import com.zulham.githubusersearch.ViewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.InternalCoroutinesApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private var backPressed: Long = 0
 
+    private lateinit var favHelper: FavHelper
+
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,6 +51,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        favHelper = FavHelper.getInstance(applicationContext)
+        favHelper.open()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        favHelper.close()
     }
 
     private fun showErrorMessage() {

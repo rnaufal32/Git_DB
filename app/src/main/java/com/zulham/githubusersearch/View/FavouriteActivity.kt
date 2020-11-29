@@ -18,9 +18,6 @@ class FavouriteActivity : AppCompatActivity() {
 
     private val listFav = ArrayList<FavUser>()
 
-    private lateinit var favHelper: FavHelper
-
-    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourite)
@@ -31,13 +28,6 @@ class FavouriteActivity : AppCompatActivity() {
 
         setUpToolbar()
 
-        favHelper = FavHelper.getInstance(applicationContext)
-        favHelper.open()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        favHelper.close()
     }
 
     private fun recycleFavUser() {

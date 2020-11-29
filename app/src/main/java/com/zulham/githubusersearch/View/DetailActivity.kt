@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var userRepos: TextView
     private lateinit var fav: FloatingActionButton
     private lateinit var detailViewModel: DetailViewModel
-    private lateinit var favHelper: FavHelper
+    //private lateinit var favHelper: FavHelper
 
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,13 +75,13 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        favHelper = FavHelper.getInstance(applicationContext)
+        //favHelper = FavHelper.getInstance(applicationContext)
 
         var statusFavorite = false
         setStatusFavorite(statusFavorite)
         fav.setOnClickListener{
             statusFavorite = !statusFavorite
-            favHelper.insert(ContentValues())
+            //favHelper.insert(ContentValues())
             setStatusFavorite(statusFavorite)
         }
 

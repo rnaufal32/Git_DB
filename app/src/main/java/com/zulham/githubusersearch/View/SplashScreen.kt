@@ -8,8 +8,10 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.animation.AnimationUtils
+import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.Model.User
 import com.zulham.githubusersearch.R
+import kotlinx.coroutines.InternalCoroutinesApi
 
 class SplashScreen : AppCompatActivity() {
 
