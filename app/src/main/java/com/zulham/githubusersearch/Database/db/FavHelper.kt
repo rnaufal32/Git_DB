@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.TABLE_NAME
+import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.USER_NAME
 import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion._ID
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
@@ -66,10 +67,18 @@ class FavHelper(context: Context) {
                 null)
     }
 
-    fun insert(values: ContentValues?): Long = database.insert(DB_TABLE, null, values)
+    fun insert(values: ContentValues?): Long {
+        if (!database.isOpen) {
+            open()
+        }
+        return database.insert(DB_TABLE, null, values)
+    }
 
     fun update(id: String, values: ContentValues?): Int {
-        return database.update(DB_TABLE, values, "$_ID = ?", arrayOf(id))
+        if (!database.isOpen) {
+            open()
+        }
+        return database.update(DB_TABLE, values, "$USER_NAME = ?", arrayOf(id))
     }
 
 }
