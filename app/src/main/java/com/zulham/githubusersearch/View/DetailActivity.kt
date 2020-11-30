@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.loopj.android.http.AsyncHttpClient.log
 import com.zulham.githubusersearch.Adapter.PagerAdapter
 import com.zulham.githubusersearch.Database.db.DatabaseContract
+import com.zulham.githubusersearch.Database.db.DatabaseContract.FavColumns.Companion.USER_NAME
 import com.zulham.githubusersearch.Database.db.DatabaseHelper
 import com.zulham.githubusersearch.Database.db.FavHelper
 import com.zulham.githubusersearch.R
@@ -25,6 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlin.random.Random
 import com.zulham.githubusersearch.Model.UserDetail as UserDetail
 
 class DetailActivity : AppCompatActivity() {
@@ -37,7 +39,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var fav: FloatingActionButton
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var favHelper: FavHelper
-
     private lateinit var contentValues: ContentValues
 
     @InternalCoroutinesApi
@@ -49,6 +50,8 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Detail User"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        contentValues = ContentValues()
 
         userImage = findViewById(R.id.userdetailImg)
         userName = findViewById(R.id.userName)
@@ -88,6 +91,7 @@ class DetailActivity : AppCompatActivity() {
             statusFavorite = !statusFavorite
             contentValues.put(DatabaseContract.FavColumns.IS_FAV, statusFavorite)
             favHelper.insert(contentValues)
+            favHelper.update(USER_NAME, contentValues)
             setStatusFavorite(statusFavorite)
         }
 
@@ -131,7 +135,7 @@ class DetailActivity : AppCompatActivity() {
         userComp.text = user.company
         userRepos.text = user.repository.toString()
 
-        contentValues.put(DatabaseContract.FavColumns.USER_ID, 123)
+        contentValues.put(DatabaseContract.FavColumns.USER_ID, user.id)
         contentValues.put(DatabaseContract.FavColumns.USER_NAME, user.name)
         contentValues.put(DatabaseContract.FavColumns.IMG_USER, user.avatar_url)
     }

@@ -10,6 +10,7 @@ data class UserDetail(
     var location: String,
     var company: String,
     var repository: Int,
-    var avatar_url: String
+    var avatar_url: String,
+    var id: Int
 
 ) : Parcelable

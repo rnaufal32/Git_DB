@@ -17,8 +17,8 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_N
                 " (${DatabaseContract.FavColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " ${DatabaseContract.FavColumns.USER_NAME} TEXT NOT NULL," +
                 " ${DatabaseContract.FavColumns.USER_ID} TEXT NOT NULL," +
-                " ${DatabaseContract.FavColumns.IS_FAV} BOOLEAN," +
-                " ${DatabaseContract.FavColumns.IMG_USER} TEXT NOT NULL)"
+                " ${DatabaseContract.FavColumns.IMG_USER} TEXT NOT NULL," +
+                " ${DatabaseContract.FavColumns.IS_FAV} BOOLEAN)"
 
     }
 

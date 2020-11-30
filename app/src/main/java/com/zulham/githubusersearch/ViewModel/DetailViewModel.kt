@@ -41,7 +41,8 @@ class DetailViewModel: ViewModel() {
                             name = res.getString("name"),
                             location = checkNullToString(res, "location"),
                             company = checkNullToString(res, "company"),
-                            repository = res.getInt("public_repos")
+                            repository = res.getInt("public_repos"),
+                                id = res.getInt("id")
                         )
 
                         detail.value = user
